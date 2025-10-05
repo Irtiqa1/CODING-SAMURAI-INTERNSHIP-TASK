@@ -13,8 +13,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - Responsive web design
 - Basic JavaScript interactivity
 
-**Live Demo:** [Portfolio Website](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-1-portfolio-website/)
-
 **Files:**
 - `index.html` - Main portfolio page
 - `style.css` - Styling file
@@ -33,8 +31,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - Professional UI/UX design
 
 **Project:** NexaFlow - Smart Task Management Platform
-
-**Live Demo:** [NexaFlow Landing Page](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-2-responsive-landing-page/)
 
 **Features:**
 - 🎨 Modern, professional design with gradient aesthetics
