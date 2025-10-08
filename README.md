@@ -13,6 +13,7 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - Responsive web design
 - Basic JavaScript interactivity
 
+<<<<<<< HEAD
 **Live Demo:** [Portfolio Website](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-1-portfolio-website/)
 
 **Files:**
@@ -20,6 +21,13 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - `style.css` - Styling file
 - `script.js` - JavaScript functionality
 
+=======
+**Files:**
+- `index.html` - Main portfolio page
+- `style.css` - Styling file
+- `script.js` - JavaScript functionality
+
+>>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
 ---
 
 ### 🎯 Task 2: Responsive Landing Page
@@ -34,8 +42,11 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 
 **Project:** NexaFlow - Smart Task Management Platform
 
+<<<<<<< HEAD
 **Live Demo:** [NexaFlow Landing Page](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-2-responsive-landing-page/)
 
+=======
+>>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
 **Features:**
 - 🎨 Modern, professional design with gradient aesthetics
 - 📱 Fully responsive across all devices (mobile-first approach)
@@ -72,4 +83,8 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 
 1. Clone the repository:
 ```bash
+<<<<<<< HEAD
 git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
+=======
+git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
+>>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
