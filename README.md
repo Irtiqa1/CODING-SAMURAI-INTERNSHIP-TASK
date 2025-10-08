@@ -13,7 +13,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - Responsive web design
 - Basic JavaScript interactivity
 
-<<<<<<< HEAD
 **Live Demo:** [Portfolio Website](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-1-portfolio-website/)
 
 **Files:**
@@ -21,13 +20,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - `style.css` - Styling file
 - `script.js` - JavaScript functionality
 
-=======
-**Files:**
-- `index.html` - Main portfolio page
-- `style.css` - Styling file
-- `script.js` - JavaScript functionality
-
->>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
 ---
 
 ### 🎯 Task 2: Responsive Landing Page
@@ -42,11 +34,8 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 
 **Project:** NexaFlow - Smart Task Management Platform
 
-<<<<<<< HEAD
 **Live Demo:** [NexaFlow Landing Page](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-2-responsive-landing-page/)
 
-=======
->>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
 **Features:**
 - 🎨 Modern, professional design with gradient aesthetics
 - 📱 Fully responsive across all devices (mobile-first approach)
@@ -79,12 +68,39 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 
 ---
 
-## 🚀 How to Run Locally
+### 🎯 Task 3: Interactive To-Do List Application
+**Description:** Develop a to-do list web application where users can add, edit, delete, and mark tasks as complete using React.
 
-1. Clone the repository:
+**Skills Learned:**
+- React components and state management
+- DOM manipulation with React
+- Event handling in React
+- CRUD operations (Create, Read, Update, Delete)
+- Component-based architecture
+
+**Technologies Used:**
+- React.js
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Create React App
+
+**Features:**
+- ✅ Add new tasks
+- ✏️ Edit existing tasks
+- 🗑️ Delete tasks
+- ✓ Mark tasks as complete/incomplete
+- 📱 Responsive design
+- 💾 Local storage persistence
+
+**Key Implementation:**
+- State management using React hooks (useState)
+- Event handling for user interactions
+- Dynamic rendering of todo items
+- Conditional styling for completed tasks
+
+**How to Run:**
 ```bash
-<<<<<<< HEAD
-git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
-=======
-git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
->>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
+cd task-3-todo-app
+npm install
+npm start
