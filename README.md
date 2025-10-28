@@ -13,8 +13,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - Responsive web design
 - Basic JavaScript interactivity
 
-<<<<<<< HEAD
-**Live Demo:** [Portfolio Website](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-1-portfolio-website/)
 
 **Files:**
 - `index.html` - Main portfolio page
@@ -27,8 +25,7 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - `style.css` - Styling file
 - `script.js` - JavaScript functionality
 
->>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
----
+
 
 ### 🎯 Task 2: Responsive Landing Page
 **Description:** Build a responsive landing page for a fictional product or service. Ensure it adjusts seamlessly to different screen sizes using CSS media queries.
@@ -41,9 +38,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 - Professional UI/UX design
 
 **Project:** NexaFlow - Smart Task Management Platform
-
-<<<<<<< HEAD
-**Live Demo:** [NexaFlow Landing Page](https://irtiqa1.github.io/CODING-SAMURAI-INTERNSHIP-TASK/Task-2-responsive-landing-page/)
 
 =======
 >>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
@@ -86,5 +80,56 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 <<<<<<< HEAD
 git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
 =======
+
+### 🎯 **Task 3: Interactive To-Do List Application**
+**Description:** Build a dynamic to-do list application using React with full CRUD functionality.
+
+**Skills Learned:**
+- React components and state management
+- Event handling and user interactions
+- Local storage implementation
+- Modern React hooks (useState, useEffect)
+- Responsive UI design
+
+**Features:**
+- ✅ Add new tasks with descriptions
+- ✏️ Edit existing tasks inline
+- 🗑️ Delete tasks with confirmation
+- 📱 Responsive design for all devices
+- 💾 Local storage persistence
+- 🎯 Task filtering (All/Active/Completed)
+- ⚡ Real-time updates
+
+**Technologies Used:**
+- React.js
+- CSS3 with modern styling
+- Local Storage API
+- JavaScript ES6+
+
+---
+
+### 🎯 **Task 4: Basic Blog Application**
+**Description:** Build a full-stack blog application with complete CRUD operations and responsive design.
+
+**Skills Learned:**
+- Full-stack web development
+- Node.js and Express.js backend
+- MongoDB database integration
+- EJS templating engine
+- RESTful API design
+- File upload handling
+
+**Features:**
+- ✍️ Create, Read, Update, Delete blog posts
+- 📝 Rich text editing capabilities
+- 🖼️ Image upload and management
+- 📱 Fully responsive design
+- 🏷️ Category and tagging system
+- 🔍 Search and filter functionality
+
+**Technologies Used:**
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB with Mongoose
+- **Frontend:** EJS, Bootstrap, CSS3
 git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
 >>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
