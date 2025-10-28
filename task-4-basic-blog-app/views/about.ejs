@@ -1,0 +1,584 @@
+<%
+  const activePage = 'about';
+  const title = 'About BlogSphere | Share Your Stories';
+%>
+
+<!-- Hero Section -->
+<section class="about-hero py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="hero-content">
+          <h1 class="display-3 mb-4">About BlogSphere</h1>
+          <p class="lead mb-4">
+            A minimalist blogging platform built for writers, thinkers, and creators who believe in the power of words.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-number" id="totalPosts"><%= postsCount || 0 %></div>
+              <div class="stat-label">Stories Shared</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Free Forever</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">2024</div>
+              <div class="stat-label">Born In</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-visual">
+          <div class="floating-element element-1">
+            <i class="fas fa-pen-nib"></i>
+          </div>
+          <div class="floating-element element-2">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="floating-element element-3">
+            <i class="fas fa-users"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-4 mb-4">Our Mission</h2>
+        <p class="mission-text lead">
+          To create a space where every voice can be heard, every story can be shared, and every idea can find its audience. 
+          We believe that writing should be simple, beautiful, and accessible to everyone.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="display-4 mb-3">Why BlogSphere?</h2>
+        <p class="lead text-muted">Designed with writers in mind</p>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h4 class="feature-title">Lightning Fast</h4>
+          <p class="feature-description">
+            Write and publish in seconds with our optimized, distraction-free editor. No complicated setup required.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h4 class="feature-title">Built with Love</h4>
+          <p class="feature-description">
+            Crafted by writers for writers. Every feature is designed to enhance your writing experience.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card text-center">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h4 class="feature-title">Privacy First</h4>
+          <p class="feature-description">
+            Your content belongs to you. We don't track, sell data, or show ads. Ever.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="display-4 mb-3">The Story Behind BlogSphere</h2>
+        <p class="lead text-muted">From a simple idea to a platform for storytellers</p>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="story-timeline">
+          <div class="timeline-item">
+            <div class="timeline-date">2023</div>
+            <div class="timeline-content">
+              <h4>The Beginning</h4>
+              <p>Frustrated with complicated blogging platforms, we set out to create something simpler, cleaner, and more focused on writing.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">2024</div>
+            <div class="timeline-content">
+              <h4>BlogSphere Born</h4>
+              <p>After months of development and testing with writers, BlogSphere was launched with a simple mission: make writing enjoyable again.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-date">Future</div>
+            <div class="timeline-content">
+              <h4>Your Stories</h4>
+              <p>We're building this platform together. Your feedback and stories shape what BlogSphere becomes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center mb-5">
+        <h2 class="display-4 mb-3">Our Values</h2>
+      </div>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="value-item">
+          <h4 class="value-title">
+            <i class="fas fa-feather-alt me-3"></i>
+            Simplicity
+          </h4>
+          <p class="value-description">
+            We believe the best tools get out of the way and let you focus on what matters most: your writing.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="value-item">
+          <h4 class="value-title">
+            <i class="fas fa-handshake me-3"></i>
+            Community
+          </h4>
+          <p class="value-description">
+            Writing can be lonely. We're building a space where writers can connect, share, and grow together.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="value-item">
+          <h4 class="value-title">
+            <i class="fas fa-lock me-3"></i>
+            Privacy
+          </h4>
+          <p class="value-description">
+            Your words are precious. We protect your privacy and give you complete control over your content.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="value-item">
+          <h4 class="value-title">
+            <i class="fas fa-infinity me-3"></i>
+            Accessibility
+          </h4>
+          <p class="value-description">
+            Great writing tools should be available to everyone, regardless of technical skill or budget.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="display-4 mb-4">Ready to Share Your Story?</h2>
+        <p class="lead mb-4">
+          Join our growing community of writers and start your blogging journey today.
+        </p>
+        <div class="cta-actions">
+          <a href="/posts/new" class="btn btn-primary btn-lg me-3">
+            <i class="fas fa-pen-fancy me-2"></i>Start Writing
+          </a>
+          <a href="/posts" class="btn btn-outline-secondary btn-lg">
+            <i class="fas fa-book-open me-2"></i>Read Stories
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2 class="display-4 text-center mb-5">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                Is BlogSphere really free?
+              </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes, completely free! We believe everyone should have access to great writing tools without financial barriers.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Can I export my content?
+              </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Absolutely. You own your content and can export it at any time in multiple formats.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                How do I get started?
+              </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Simply click "Start Writing" above! No registration required. You can start publishing immediately.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Is there a word limit?
+              </button>
+            </h3>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Posts can be up to 10,000 characters. This is plenty for most stories while keeping the platform fast and responsive.
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                Can I edit my posts after publishing?
+              </button>
+            </h3>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Yes! You can edit your posts anytime. Just click the edit button on any of your published stories.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-hero {
+    background: linear-gradient(135deg, var(--light-color) 0%, var(--light-gray) 100%);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    display: block;
+  }
+
+  .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 300px;
+  }
+
+  .floating-element {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--accent-color);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .element-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+  }
+
+  .element-2 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: 2s;
+  }
+
+  .element-3 {
+    bottom: 20%;
+    right: 10%;
+    animation-delay: 4s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(10px); }
+  }
+
+  .mission-section {
+    background: var(--light-color);
+  }
+
+  .mission-text {
+    font-size: 1.25rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+
+  .feature-card {
+    background: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 2.5rem 2rem;
+    transition: var(--transition);
+    height: 100%;
+  }
+
+  .feature-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    color: var(--accent-color);
+  }
+
+  .feature-title {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  .feature-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .story-timeline {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  .timeline-item {
+    display: flex;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .timeline-date {
+    width: 60px;
+    font-weight: 600;
+    color: var(--accent-color);
+    font-size: 1.1rem;
+  }
+
+  .timeline-content {
+    flex: 1;
+    padding-left: 2rem;
+  }
+
+  .timeline-content h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  .value-item {
+    background: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    height: 100%;
+  }
+
+  .value-title {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .value-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+    color: var(--light-color);
+  }
+
+  .cta-section .display-4,
+  .cta-section .lead {
+    color: var(--light-color);
+  }
+
+  .cta-section .btn-outline-secondary {
+    border-color: var(--light-color);
+    color: var(--light-color);
+  }
+
+  .cta-section .btn-outline-secondary:hover {
+    background: var(--light-color);
+    color: var(--accent-color);
+  }
+
+  .accordion-item {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+  }
+
+  .accordion-button {
+    background: var(--light-color);
+    color: var(--text-primary);
+    font-weight: 500;
+    border: none;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background: var(--light-color);
+    color: var(--accent-color);
+  }
+
+  .accordion-body {
+    background: var(--light-color);
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 768px) {
+    .hero-stats {
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+    }
+    
+    .display-3, .display-4 {
+      font-size: 2rem;
+    }
+    
+    .timeline-item {
+      flex-direction: column;
+    }
+    
+    .timeline-date {
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-content {
+      padding-left: 0;
+    }
+    
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .cta-actions .btn {
+      margin: 0;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Animate stats counter
+    const totalPosts = document.getElementById('totalPosts');
+    const targetCount = parseInt(totalPosts.textContent);
+    let currentCount = 0;
+    
+    const counter = setInterval(() => {
+      currentCount += Math.ceil(targetCount / 50);
+      if (currentCount >= targetCount) {
+        currentCount = targetCount;
+        clearInterval(counter);
+      }
+      totalPosts.textContent = currentCount;
+    }, 50);
+
+    // Initialize Bootstrap accordion if needed
+    const accordionButtons = document.querySelectorAll('.accordion-button');
+    accordionButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Bootstrap handles the collapse, we just add any custom behavior here
+      });
+    });
+  });
+</script>

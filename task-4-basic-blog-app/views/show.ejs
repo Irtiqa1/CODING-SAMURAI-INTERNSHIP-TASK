@@ -1,0 +1,367 @@
+<%
+  const activePage = 'posts';
+  const title = `${post.title} | BlogSphere`;
+%>
+
+<!-- Reading Progress Bar -->
+<div class="reading-progress">
+  <div class="reading-progress-bar" id="readingProgress"></div>
+</div>
+
+<!-- Breadcrumb -->
+<nav aria-label="breadcrumb" class="mb-4">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/" class="text-decoration-none d-flex align-items-center">
+        <i class="fas fa-home me-1"></i>Home
+      </a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="/posts" class="text-decoration-none d-flex align-items-center">
+        <i class="fas fa-stream me-1"></i>All Posts
+      </a>
+    </li>
+    <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
+      <i class="fas fa-file-alt me-1"></i>Post
+    </li>
+  </ol>
+</nav>
+
+<article class="post-view">
+  <!-- Post Header -->
+  <header class="post-header card mb-4">
+    <div class="card-body">
+      <div class="post-meta-top mb-3">
+        <span class="badge bg-light text-dark">
+          <i class="fas fa-tag me-1"></i>Article
+        </span>
+        <span class="text-muted ms-3">
+          <i class="far fa-clock me-1"></i>
+          <span id="readingTime">Calculating...</span>
+        </span>
+      </div>
+      
+      <h1 class="post-title display-4"><%= post.title %></h1>
+      
+      <div class="post-meta">
+        <div class="author-info d-flex align-items-center">
+          <div class="author-avatar me-3">
+            <%= post.author.charAt(0).toUpperCase() %>
+          </div>
+          <div>
+            <div class="author-name fw-bold"><%= post.author %></div>
+            <div class="post-date text-muted small">
+              <i class="far fa-calendar me-1"></i>
+              <time datetime="<%= post.createdAt.toISOString() %>">
+                <%= post.createdAt.toLocaleDateString('en-US', { 
+                  year: 'numeric', 
+                  month: 'long', 
+                  day: 'numeric' 
+                }) %>
+              </time>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Share Buttons -->
+      <div class="share-section mt-4 pt-3 border-top">
+        <h6 class="share-title mb-3">
+          <i class="fas fa-share-alt me-2"></i>Share this post
+        </h6>
+        <div class="share-buttons">
+          <a href="#" class="share-btn share-twitter" title="Share on Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="share-btn share-facebook" title="Share on Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="share-btn share-linkedin" title="Share on LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="share-btn share-link" id="copyLinkBtn" title="Copy link">
+            <i class="fas fa-link"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <div class="post-content card">
+    <div class="card-body">
+      <div class="content-body">
+        <% post.content.split('\n\n').forEach(paragraph => { %>
+          <% if (paragraph.trim() !== '') { %>
+            <p class="content-paragraph"><%= paragraph %></p>
+          <% } %>
+        <% }); %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <!-- Back Button Only -->
+<div class="post-actions card mt-4">
+  <div class="card-body text-center">
+    <a href="/posts" class="btn btn-primary">
+      <i class="fas fa-arrow-left me-2"></i>Back to All Posts
+    </a>
+  </div>
+</div>
+</article>
+
+<!-- Back to Top Button -->
+<a href="#" class="back-to-top" id="backToTop">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--light-gray);
+    z-index: 1000;
+  }
+
+  .reading-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-color), #3498db);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .post-view {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(135deg, var(--accent-color), #3498db);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+
+  .share-section {
+    background: var(--light-gray);
+    margin: 0 -1.75rem;
+    padding: 0 1.75rem;
+  }
+
+  .share-title {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .share-buttons {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--light-color);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+  }
+
+  .share-btn:hover {
+    transform: translateY(-2px);
+    color: white;
+  }
+
+  .share-twitter:hover {
+    background-color: #1DA1F2;
+    border-color: #1DA1F2;
+  }
+
+  .share-facebook:hover {
+    background-color: #4267B2;
+    border-color: #4267B2;
+  }
+
+  .share-linkedin:hover {
+    background-color: #0077B5;
+    border-color: #0077B5;
+  }
+
+  .share-link:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+
+  .content-body {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+
+  .content-paragraph {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+  }
+
+  .content-paragraph:first-child {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+  }
+
+  .back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius);
+    background-color: var(--accent-color);
+    color: var(--light-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(44, 62, 80, 0.2);
+    z-index: 100;
+    transition: var(--transition);
+    text-decoration: none;
+    border: 1px solid var(--accent-color);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .back-to-top:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    .content-body {
+      font-size: 1rem;
+    }
+    
+    .content-paragraph:first-child {
+      font-size: 1.1rem;
+    }
+    
+    .post-actions .d-flex {
+      justify-content: center;
+    }
+    
+    .post-actions .ms-auto {
+      margin-left: 0 !important;
+      margin-top: 1rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const readingProgress = document.getElementById('readingProgress');
+    const backToTop = document.getElementById('backToTop');
+    const copyLinkBtn = document.getElementById('copyLinkBtn');
+    const deleteForm = document.getElementById('deleteForm');
+    const readingTimeElement = document.getElementById('readingTime');
+
+    // Calculate reading time
+    function calculateReadingTime() {
+      const content = document.querySelector('.content-body');
+      const text = content.textContent || content.innerText;
+      const wordCount = text.trim().split(/\s+/).length;
+      const readingTimeMinutes = Math.ceil(wordCount / 200);
+      readingTimeElement.textContent = `${readingTimeMinutes} min read`;
+    }
+
+    // Reading progress
+    function updateReadingProgress() {
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight - windowHeight;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const progress = (scrollTop / documentHeight) * 100;
+      
+      readingProgress.style.width = `${progress}%`;
+      
+      if (scrollTop > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    }
+
+    // Copy link
+    copyLinkBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(function() {
+        showToast('Link copied to clipboard!', 'success');
+      }, function() {
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showToast('Link copied to clipboard!', 'success');
+      });
+    });
+
+    // Back to top
+    backToTop.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Delete confirmation
+    if (deleteForm) {
+      deleteForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+          const submitBtn = this.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Deleting...';
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            this.submit();
+          }, 1000);
+        }
+      });
+    }
+
+    // Initialize
+    calculateReadingTime();
+    window.addEventListener('scroll', updateReadingProgress);
+    window.addEventListener('resize', updateReadingProgress);
+    updateReadingProgress();
+  });
+</script>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BlogSphere — A clean, modern platform for writers, thinkers, and creators." />
+  <title><%= typeof title !== 'undefined' ? title : 'BlogSphere – Share Your Ideas' %></title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <!-- Custom CSS -->
+  <style>
+    /* Minimalo Theme Variables */
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #7f8c8d;
+      --accent-color: #2c3e50;
+      --light-color: #ffffff;
+      --light-gray: #f8f9fa;
+      --medium-gray: #e9ecef;
+      --dark-gray: #95a5a6;
+      --border-color: #e1e8ed;
+      --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --transition: all 0.3s ease;
+      --border-radius: 0;
+      --text-primary: #2c3e50;
+      --text-secondary: #7f8c8d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-primary);
+      line-height: 1.7;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-size: 16px;
+      font-weight: 400;
+      position: relative;
+    }
+
+    /* Background Pattern */
+    .background-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 15% 50%, rgba(44, 62, 80, 0.03) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(44, 62, 80, 0.03) 0%, transparent 25%);
+      background-size: 50% 50%, 50% 50%;
+      background-position: 0% 0%, 100% 100%;
+      background-repeat: no-repeat;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .display-1 { font-size: 3.5rem; font-weight: 400; }
+    .display-2 { font-size: 3rem; font-weight: 400; }
+    .display-3 { font-size: 2.5rem; font-weight: 400; }
+
+    p {
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+    }
+
+    .lead {
+      font-size: 1.25rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    /* Navigation */
+    .navbar {
+      background-color: var(--light-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 0;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .navbar-brand {
+      font-weight: 500;
+      color: var(--accent-color);
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-icon {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+      color: var(--accent-color);
+    }
+
+    .nav-link {
+      font-weight: 400;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--accent-color);
+    }
+
+    /* Buttons */
+    .btn {
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.75rem 1.5rem;
+      font-size: 0.9rem;
+      border: 1px solid var(--accent-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-color);
+      color: var(--light-color);
+      border-color: var(--accent-color);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-secondary {
+      color: var(--text-secondary);
+      border-color: var(--border-color);
+      background-color: transparent;
+    }
+
+    .btn-outline-secondary:hover {
+      background-color: var(--light-gray);
+      border-color: var(--dark-gray);
+      color: var(--text-primary);
+    }
+
+    .btn-outline-danger {
+      color: #e74c3c;
+      border-color: #e74c3c;
+      background-color: transparent;
+    }
+
+    .btn-outline-danger:hover {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    /* Cards */
+    .card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      overflow: hidden;
+      height: 100%;
+      background-color: var(--light-color);
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .card-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-title {
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      font-size: 1.25rem;
+    }
+
+    .card-text {
+      color: var(--text-secondary);
+      flex-grow: 1;
+      font-size: 0.95rem;
+    }
+
+    /* Search */
+    .search-container {
+      position: relative;
+      max-width: 280px;
+    }
+
+    .search-input {
+      padding: 0.6rem 2.5rem 0.6rem 1rem;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      background-color: var(--light-color);
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 2px rgba(44, 62, 80, 0.1);
+      outline: none;
+    }
+
+    .search-icon {
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--dark-gray);
+      pointer-events: none;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--light-color) 0%, var(--light-gray) 100%);
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-heading {
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .footer-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius);
+      background-color: var(--light-gray);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+    }
+
+    .social-link:hover {
+      background-color: var(--accent-color);
+      color: var(--light-color);
+      border-color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    /* Floating Action Button */
+    .floating-action-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      border-radius: var(--border-radius);
+      background-color: var(--accent-color);
+      color: var(--light-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(44, 62, 80, 0.2);
+      z-index: 1000;
+      transition: var(--transition);
+      text-decoration: none;
+      border: 1px solid var(--accent-color);
+    }
+
+    .floating-action-btn:hover {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      color: var(--light-color);
+      transform: translateY(-2px);
+    }
+
+    /* Toast Container */
+    .toast-container {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1050;
+    }
+
+    .toast {
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Animation for page transitions */
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .display-1 { font-size: 2.5rem; }
+      .display-2 { font-size: 2rem; }
+      .display-3 { font-size: 1.75rem; }
+      
+      .search-container {
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+      
+      .floating-action-btn {
+        bottom: 1rem;
+        right: 1rem;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body class="minimalo-theme">
+  <!-- Background Pattern -->
+  <div class="background-pattern"></div>
+  
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <i class="fas fa-pen-nib brand-icon"></i>
+        BlogSphere
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link <%= typeof activePage !== 'undefined' && activePage === 'home' ? 'active' : '' %>" href="/">
+              <i class="fas fa-home me-1"></i>Home
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= typeof activePage !== 'undefined' && activePage === 'posts' ? 'active' : '' %>" href="/posts">
+              <i class="fas fa-stream me-1"></i>All Posts
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <%= typeof activePage !== 'undefined' && activePage === 'about' ? 'active' : '' %>" href="/about">
+              <i class="fas fa-info-circle me-1"></i>About
+            </a>
+          </li>
+        </ul>
+        <div class="d-flex align-items-center">
+          <div class="search-container me-3">
+            <input type="text" class="form-control search-input" placeholder="Search posts...">
+            <i class="fas fa-search search-icon"></i>
+          </div>
+          <a href="/posts/new" class="btn btn-primary d-none d-md-block">
+            <i class="fas fa-plus me-1"></i>New Post
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container fade-in">
+    <%- body %>
+  </main>
+
+  <!-- Floating Action Button -->
+  <a href="/posts/new" class="floating-action-btn">
+    <i class="fas fa-feather-alt"></i>
+  </a>
+
+  <!-- Toast Container -->
+  <div class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="footer-brand">
+            <i class="fas fa-pen-nib me-2"></i>
+            <span class="h5">BlogSphere</span>
+          </div>
+          <p class="footer-text mt-3">
+            A minimalist, responsive blogging platform for modern creators. 
+            Write, share, and inspire with clean, beautiful design.
+          </p>
+          <div class="social-links mt-4">
+            <a href="#" class="social-link" title="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link" title="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="social-link" title="LinkedIn">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="#" class="social-link" title="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4">
+          <h6 class="footer-heading">Explore</h6>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/posts">All Posts</a></li>
+            <li><a href="/posts/new">Write</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4 mb-4">
+          <h6 class="footer-heading">Resources</h6>
+          <ul class="footer-links">
+            <li><a href="#">Writing Tips</a></li>
+            <li><a href="#">Style Guide</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4 mb-4">
+          <h6 class="footer-heading">Newsletter</h6>
+          <p class="footer-text">Get the latest posts and writing tips delivered to your inbox.</p>
+          <div class="newsletter-form">
+            <input type="email" class="form-control mb-2" placeholder="Your email address">
+            <button class="btn btn-primary btn-sm w-100">Subscribe</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom text-center pt-4 mt-4 border-top">
+        <p class="small text-muted mb-0">
+          &copy; <span id="currentYear"></span> BlogSphere. Crafted with <i class="fas fa-heart text-danger"></i> for writers.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set current year in footer
+      document.getElementById('currentYear').textContent = new Date().getFullYear();
+      
+      // Search functionality
+      const searchInput = document.querySelector('.search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const postCards = document.querySelectorAll('.post-card');
+          
+          postCards.forEach(card => {
+            const title = card.querySelector('.card-title').textContent.toLowerCase();
+            const content = card.querySelector('.card-text').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || content.includes(searchTerm)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      }
+
+      // Toast notification function
+      function showToast(message, type = 'info') {
+        const toastContainer = document.querySelector('.toast-container');
+        const toastId = 'toast-' + Date.now();
+        
+        let bgClass = 'bg-primary';
+        if (type === 'success') bgClass = 'bg-success';
+        if (type === 'warning') bgClass = 'bg-warning';
+        if (type === 'danger') bgClass = 'bg-danger';
+        if (type === 'info') bgClass = 'bg-info';
+        
+        const toastHTML = `
+          <div id="${toastId}" class="toast align-items-center text-white ${bgClass} border-0" role="alert">
+            <div class="d-flex">
+              <div class="toast-body">
+                ${message}
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+          </div>
+        `;
+        
+        toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+        
+        const toastElement = document.getElementById(toastId);
+        const toast = new bootstrap.Toast(toastElement, { delay: 3000 });
+        toast.show();
+        
+        // Remove toast from DOM after it's hidden
+        toastElement.addEventListener('hidden.bs.toast', function() {
+          toastElement.remove();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

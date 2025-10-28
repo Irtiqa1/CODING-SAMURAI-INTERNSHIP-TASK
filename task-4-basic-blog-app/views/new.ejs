@@ -1,0 +1,1022 @@
+<%
+  const activePage = 'new';
+  const title = 'Create New Post | BlogSphere';
+%>
+
+<!-- Background Elements -->
+<div class="background-elements">
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
+  <div class="bg-circle circle-3"></div>
+</div>
+
+<div class="create-post-layout">
+  <!-- Left Sidebar - Writing Tools -->
+  <aside class="writing-tools-sidebar">
+    <div class="tools-header">
+      <h6 class="tools-title">
+        <i class="fas fa-magic me-2"></i>Writing Tools
+      </h6>
+    </div>
+    <div class="tools-content">
+      <div class="tool-item">
+        <div class="tool-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <div class="tool-info">
+          <span class="tool-name">Inspiration</span>
+          <small class="tool-desc">Get writing prompts</small>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-icon">
+          <i class="fas fa-ruler"></i>
+        </div>
+        <div class="tool-info">
+          <span class="tool-name">Format</span>
+          <small class="tool-desc">Style your text</small>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-icon">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="tool-info">
+          <span class="tool-name">Stats</span>
+          <small class="tool-desc">Track progress</small>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div class="tool-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <div class="tool-info">
+          <span class="tool-name">Preview</span>
+          <small class="tool-desc">See live changes</small>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+      <div class="stat">
+        <span class="stat-number" id="wordCount">0</span>
+        <span class="stat-label">Words</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" id="charCount">0</span>
+        <span class="stat-label">Characters</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number" id="readTime">0</span>
+        <span class="stat-label">Min Read</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="writing-area">
+    <!-- Header -->
+    <header class="writing-header">
+      <div class="header-actions">
+        <a href="/" class="back-btn">
+          <i class="fas fa-arrow-left"></i>
+          <span>Back</span>
+        </a>
+        <div class="header-controls">
+          <button class="control-btn" id="focusModeToggle" title="Focus Mode">
+            <i class="fas fa-expand"></i>
+          </button>
+          <button class="control-btn" title="Save Draft">
+            <i class="fas fa-save"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="header-content">
+        <h1 class="writing-title">Create New Story</h1>
+        <p class="writing-subtitle">Let your ideas flow. Every great story starts with a single word.</p>
+      </div>
+    </header>
+
+    <!-- Main Writing Form -->
+    <div class="writing-form-container" id="formContainer">
+      <form id="createPostForm" action="/posts" method="POST">
+        <!-- Title Input -->
+        <div class="input-group title-group">
+          <div class="input-header">
+            <label for="title" class="input-label">
+              <i class="fas fa-heading"></i>
+              Story Title
+            </label>
+            <span class="char-indicator" id="titleCharCount">0/120</span>
+          </div>
+          <input 
+            type="text" 
+            class="title-input" 
+            id="title" 
+            name="title"
+            placeholder="Give your story a compelling title..."
+            maxlength="120"
+            required
+          >
+        </div>
+
+        <!-- Author Input -->
+        <div class="input-group author-group">
+          <div class="input-header">
+            <label for="author" class="input-label">
+              <i class="fas fa-user-edit"></i>
+              Author Name
+            </label>
+            <span class="char-indicator" id="authorCharCount">0/60</span>
+          </div>
+          <input 
+            type="text" 
+            class="author-input" 
+            id="author" 
+            name="author"
+            placeholder="Your name or pen name..."
+            maxlength="60"
+            required
+          >
+        </div>
+
+        <!-- Content Editor -->
+        <div class="input-group content-group">
+          <div class="input-header">
+            <label for="content" class="input-label">
+              <i class="fas fa-pen-fancy"></i>
+              Your Story
+            </label>
+            <div class="content-stats">
+              <span class="char-indicator" id="contentCharCount">0/10000</span>
+              <span class="word-indicator" id="wordCountIndicator">0 words</span>
+            </div>
+          </div>
+          
+          <div class="content-editor">
+            <textarea 
+              class="content-input" 
+              id="content" 
+              name="content"
+              placeholder="Begin your masterpiece here..."
+              maxlength="10000"
+              required
+            ></textarea>
+            
+            <!-- Writing Assistant -->
+            <div class="writing-assistant">
+              <div class="assistant-tips">
+                <div class="tip-item">
+                  <i class="fas fa-quote-left"></i>
+                  <span>Start with a hook</span>
+                </div>
+                <div class="tip-item">
+                  <i class="fas fa-paragraph"></i>
+                  <span>Break into paragraphs</span>
+                </div>
+                <div class="tip-item">
+                  <i class="fas fa-heart"></i>
+                  <span>Write with passion</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <div class="left-actions">
+            <button type="button" class="btn btn-outline" id="saveDraftBtn">
+              <i class="fas fa-bookmark"></i>
+              Save Draft
+            </button>
+            <button type="button" class="btn btn-outline" id="previewBtn">
+              <i class="fas fa-eye"></i>
+              Preview
+            </button>
+          </div>
+          <div class="right-actions">
+            <a href="/" class="btn btn-secondary">
+              Cancel
+            </a>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i>
+              Publish Story
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Auto-save Indicator -->
+    <div class="auto-save-indicator" id="autoSaveIndicator">
+      <i class="fas fa-check-circle"></i>
+      <span>All changes saved</span>
+    </div>
+  </main>
+
+  <!-- Preview Panel -->
+  <aside class="preview-panel" id="previewPanel">
+    <div class="preview-header">
+      <h6 class="preview-title">
+        <i class="fas fa-eye me-2"></i>Live Preview
+      </h6>
+      <button class="close-preview" id="closePreview">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div class="preview-content" id="livePreview">
+      <div class="preview-placeholder">
+        <i class="fas fa-newspaper"></i>
+        <h4>Your Story Preview</h4>
+        <p>Start writing to see your story come to life here</p>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- Loading Overlay -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-content">
+    <div class="loading-spinner">
+      <i class="fas fa-pen-fancy"></i>
+    </div>
+    <h4>Publishing Your Story</h4>
+    <p>Sharing your words with the world...</p>
+  </div>
+</div>
+
+<style>
+  .create-post-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr 400px;
+    gap: 0;
+    min-height: calc(100vh - 200px);
+    position: relative;
+  }
+
+  /* Background Elements */
+  .background-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--light-gray) 0%, transparent 70%);
+    opacity: 0.1;
+  }
+
+  .circle-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    left: 5%;
+  }
+
+  .circle-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 20%;
+    right: 10%;
+  }
+
+  .circle-3 {
+    width: 150px;
+    height: 150px;
+    top: 50%;
+    left: 70%;
+  }
+
+  /* Left Sidebar - Writing Tools */
+  .writing-tools-sidebar {
+    background: var(--light-color);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tools-header {
+    margin-bottom: 2rem;
+  }
+
+  .tools-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .tool-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .tool-item:hover {
+    background: var(--light-gray);
+  }
+
+  .tool-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--accent-color);
+  }
+
+  .tool-info {
+    flex: 1;
+  }
+
+  .tool-name {
+    display: block;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .tool-desc {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+  }
+
+  .quick-stats {
+    margin-top: auto;
+    background: var(--light-gray);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+  }
+
+  .stat {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .stat:last-child {
+    margin-bottom: 0;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+
+  .stat-label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Main Writing Area */
+  .writing-area {
+    background: var(--light-color);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .writing-header {
+    background: var(--light-color);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2rem;
+  }
+
+  .header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+  }
+
+  .back-btn:hover {
+    color: var(--accent-color);
+    background: var(--light-gray);
+  }
+
+  .header-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .control-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--light-color);
+    border-radius: var(--border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .control-btn:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+
+  .writing-title {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .writing-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  /* Writing Form */
+  .writing-form-container {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+
+  .input-group {
+    margin-bottom: 2.5rem;
+  }
+
+  .input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .input-label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .input-label i {
+    margin-right: 0.5rem;
+    color: var(--accent-color);
+  }
+
+  .char-indicator {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .title-input, .author-input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--border-color);
+    padding: 1rem 0;
+    font-size: 1.5rem;
+    background: transparent;
+    transition: var(--transition);
+  }
+
+  .title-input {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .title-input:focus, .author-input:focus {
+    outline: none;
+    border-bottom-color: var(--accent-color);
+  }
+
+  .content-group {
+    height: 60vh;
+  }
+
+  .content-editor {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+
+  .content-input {
+    flex: 1;
+    border: none;
+    padding: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    resize: none;
+    font-family: 'Inter', sans-serif;
+    background: var(--light-color);
+  }
+
+  .content-input:focus {
+    outline: none;
+  }
+
+  .content-stats {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .word-indicator {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+
+  .writing-assistant {
+    background: var(--light-gray);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 2rem;
+  }
+
+  .assistant-tips {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .tip-item {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .tip-item i {
+    margin-right: 0.5rem;
+    color: var(--accent-color);
+  }
+
+  /* Action Buttons */
+  .action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .left-actions, .right-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    background: var(--light-color);
+    color: var(--text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border-color: var(--border-color);
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+  }
+
+  .btn-primary {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--light-color);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--border-color);
+  }
+
+  .btn-secondary:hover {
+    background: var(--light-gray);
+  }
+
+  /* Auto-save Indicator */
+  .auto-save-indicator {
+    background: var(--light-gray);
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .auto-save-indicator.saving {
+    color: #f39c12;
+  }
+
+  .auto-save-indicator.saved {
+    color: #27ae60;
+  }
+
+  /* Preview Panel */
+  .preview-panel {
+    background: var(--light-color);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .preview-title {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .close-preview {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+  }
+
+  .close-preview:hover {
+    color: var(--accent-color);
+    background: var(--light-gray);
+  }
+
+  .preview-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+  }
+
+  .preview-placeholder {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 3rem 2rem;
+  }
+
+  .preview-placeholder i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--border-color);
+  }
+
+  .preview-placeholder h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+  }
+
+  /* Loading Overlay */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .loading-content {
+    text-align: center;
+  }
+
+  .loading-spinner {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
+  }
+
+  .loading-content h4 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .loading-content p {
+    color: var(--text-secondary);
+    margin: 0;
+  }
+
+  /* Focus Mode */
+  .focus-mode .writing-tools-sidebar,
+  .focus-mode .preview-panel {
+    display: none;
+  }
+
+  .focus-mode .create-post-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .create-post-layout {
+      grid-template-columns: 250px 1fr;
+    }
+    
+    .preview-panel {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .create-post-layout {
+      grid-template-columns: 1fr;
+    }
+    
+    .writing-tools-sidebar {
+      display: none;
+    }
+    
+    .writing-header {
+      padding: 1.5rem;
+    }
+    
+    .writing-title {
+      font-size: 2rem;
+    }
+    
+    .action-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .left-actions, .right-actions {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const titleInput = document.getElementById('title');
+    const authorInput = document.getElementById('author');
+    const contentInput = document.getElementById('content');
+    const titleCharCount = document.getElementById('titleCharCount');
+    const authorCharCount = document.getElementById('authorCharCount');
+    const contentCharCount = document.getElementById('contentCharCount');
+    const wordCount = document.getElementById('wordCount');
+    const charCount = document.getElementById('charCount');
+    const readTime = document.getElementById('readTime');
+    const wordCountIndicator = document.getElementById('wordCountIndicator');
+    const livePreview = document.getElementById('livePreview');
+    const autoSaveIndicator = document.getElementById('autoSaveIndicator');
+    const createPostForm = document.getElementById('createPostForm');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const focusModeToggle = document.getElementById('focusModeToggle');
+    const formContainer = document.getElementById('formContainer');
+    const previewPanel = document.getElementById('previewPanel');
+    const closePreview = document.getElementById('closePreview');
+    const previewBtn = document.getElementById('previewBtn');
+    const saveDraftBtn = document.getElementById('saveDraftBtn');
+
+    // Initialize counters
+    updateAllCounters();
+    updateLivePreview();
+
+    // Event listeners
+    [titleInput, authorInput, contentInput].forEach(input => {
+      input.addEventListener('input', function() {
+        updateAllCounters();
+        updateLivePreview();
+        triggerAutoSave();
+      });
+    });
+
+    // Form submission
+    createPostForm.addEventListener('submit', function(e) {
+      if (!validateForm()) {
+        e.preventDefault();
+        return;
+      }
+      
+      loadingOverlay.style.display = 'flex';
+      
+      setTimeout(function() {
+        loadingOverlay.style.display = 'none';
+        showToast('Your story has been published!', 'success');
+        
+        setTimeout(function() {
+          window.location.href = '/';
+        }, 1500);
+      }, 2000);
+    });
+
+    // Focus mode
+    let isFocusMode = false;
+    focusModeToggle.addEventListener('click', function() {
+      isFocusMode = !isFocusMode;
+      document.body.classList.toggle('focus-mode', isFocusMode);
+      
+      if (isFocusMode) {
+        focusModeToggle.innerHTML = '<i class="fas fa-compress"></i>';
+        showToast('Focus mode activated', 'info');
+      } else {
+        focusModeToggle.innerHTML = '<i class="fas fa-expand"></i>';
+      }
+    });
+
+    // Preview functionality
+    previewBtn.addEventListener('click', function() {
+      previewPanel.style.display = 'flex';
+      updateLivePreview();
+    });
+
+    closePreview.addEventListener('click', function() {
+      previewPanel.style.display = 'none';
+    });
+
+    // Save draft
+    saveDraftBtn.addEventListener('click', function() {
+      triggerAutoSave();
+      showToast('Draft saved successfully', 'success');
+    });
+
+    // Functions
+    function updateAllCounters() {
+      updateCharCount(titleInput, titleCharCount);
+      updateCharCount(authorInput, authorCharCount);
+      updateCharCount(contentInput, contentCharCount);
+      
+      const content = contentInput.value;
+      const words = content.trim() ? content.trim().split(/\s+/).length : 0;
+      const characters = content.length;
+      const readingTime = Math.ceil(words / 200);
+      
+      wordCount.textContent = words;
+      charCount.textContent = characters;
+      readTime.textContent = readingTime;
+      wordCountIndicator.textContent = `${words} words`;
+    }
+
+    function updateCharCount(input, counter) {
+      const maxLength = input.getAttribute('maxlength');
+      const currentLength = input.value.length;
+      counter.textContent = `${currentLength}/${maxLength}`;
+      
+      const percentage = (currentLength / maxLength) * 100;
+      counter.classList.remove('warning', 'danger');
+      
+      if (percentage > 80 && percentage < 95) {
+        counter.classList.add('warning');
+      } else if (percentage >= 95) {
+        counter.classList.add('danger');
+      }
+    }
+
+    function updateLivePreview() {
+      const title = titleInput.value || 'Your Story Title';
+      const content = contentInput.value || 'Start writing to see your story preview...';
+      const author = authorInput.value || 'Anonymous';
+      
+      let previewHTML = '';
+      
+      if (titleInput.value || contentInput.value) {
+        previewHTML = `
+          <article class="preview-story">
+            <header class="preview-header">
+              <h1 class="preview-story-title">${escapeHtml(title)}</h1>
+              <div class="preview-meta">
+                <span class="preview-author">By ${escapeHtml(author)}</span>
+                <span class="preview-read-time">${Math.ceil(content.trim().split(/\s+/).length / 200)} min read</span>
+              </div>
+            </header>
+            <div class="preview-story-content">
+              ${formatContent(escapeHtml(content))}
+            </div>
+          </article>
+        `;
+      } else {
+        previewHTML = `
+          <div class="preview-placeholder">
+            <i class="fas fa-newspaper"></i>
+            <h4>Your Story Preview</h4>
+            <p>Start writing to see your story come to life here</p>
+          </div>
+        `;
+      }
+      
+      livePreview.innerHTML = previewHTML;
+    }
+
+    function formatContent(content) {
+      return content.split('\n\n').map(paragraph => {
+        if (paragraph.trim() === '') return '';
+        return `<p>${paragraph.replace(/\n/g, '<br>')}</p>`;
+      }).join('');
+    }
+
+    let autoSaveTimeout;
+    function triggerAutoSave() {
+      clearTimeout(autoSaveTimeout);
+      
+      autoSaveIndicator.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i><span>Saving draft...</span>';
+      autoSaveIndicator.classList.add('saving');
+      autoSaveIndicator.classList.remove('saved');
+      
+      autoSaveTimeout = setTimeout(function() {
+        autoSaveIndicator.innerHTML = '<i class="fas fa-check-circle"></i><span>All changes saved</span>';
+        autoSaveIndicator.classList.remove('saving');
+        autoSaveIndicator.classList.add('saved');
+      }, 1500);
+    }
+
+    function validateForm() {
+      let isValid = true;
+      const title = titleInput.value.trim();
+      const author = authorInput.value.trim();
+      const content = contentInput.value.trim();
+      
+      if (!title) {
+        showToast('Please give your story a title', 'warning');
+        titleInput.focus();
+        isValid = false;
+      } else if (!author) {
+        showToast('Please enter your name', 'warning');
+        authorInput.focus();
+        isValid = false;
+      } else if (!content) {
+        showToast('Your story needs some content', 'warning');
+        contentInput.focus();
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Initialize
+    autoSaveIndicator.classList.add('saved');
+    titleInput.focus();
+  });
+</script>

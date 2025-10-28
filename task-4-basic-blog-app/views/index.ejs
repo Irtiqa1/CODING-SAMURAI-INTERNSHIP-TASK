@@ -1,0 +1,381 @@
+<% 
+  const activePage = 'home';
+  const title = 'BlogSphere - Your Space for Thoughts and Ideas';
+%>
+
+<!-- Hero Section -->
+<section class="hero-section py-5 mb-5">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="hero-content">
+          <div class="hero-badge mb-3">
+            <i class="fas fa-feather me-2"></i>
+            Modern Blogging Platform
+          </div>
+          <h1 class="display-3 mb-4">Share Your <span class="text-gradient">Thoughts</span> with the World</h1>
+          <p class="lead mb-4">
+            A clean, minimal space for writers, thinkers, and creators to express themselves. 
+            No distractions, just pure writing experience.
+          </p>
+          <div class="hero-actions">
+            <a href="/posts/new" class="btn btn-primary btn-lg me-3">
+              <i class="fas fa-pen-fancy me-2"></i>Start Writing
+            </a>
+            <a href="/posts" class="btn btn-outline-secondary btn-lg">
+              <i class="fas fa-book-open me-2"></i>Read Stories
+            </a>
+          </div>
+          <div class="hero-stats mt-5">
+            <div class="row text-center">
+              <div class="col-4">
+                <div class="stat-number"><%= posts.length || 0 %></div>
+                <div class="stat-label">Total Posts</div>
+              </div>
+              <div class="col-4">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free</div>
+              </div>
+              <div class="col-4">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Possibilities</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-visual">
+          <div class="floating-card card-1">
+            <i class="fas fa-edit"></i>
+            <h4>Write Freely</h4>
+          </div>
+          <div class="floating-card card-2">
+            <i class="fas fa-share-alt"></i>
+            <h4>Share Instantly</h4>
+          </div>
+          <div class="floating-card card-3">
+            <i class="fas fa-users"></i>
+            <h4>Connect Globally</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    background: linear-gradient(135deg, var(--light-color) 0%, var(--light-gray) 100%);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--accent-color), #3498db);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 400px;
+  }
+
+  .floating-card {
+    position: absolute;
+    background: var(--light-color);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .floating-card i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+  }
+
+  .floating-card h4 {
+    font-size: 1rem;
+    margin: 0;
+    color: var(--text-primary);
+  }
+
+  .card-1 {
+    top: 20%;
+    left: 10%;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .card-2 {
+    top: 50%;
+    right: 10%;
+    animation: float 3s ease-in-out infinite 1s;
+  }
+
+  .card-3 {
+    bottom: 20%;
+    left: 30%;
+    animation: float 3s ease-in-out infinite 2s;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+
+  .feature-card {
+    background: var(--light-color);
+    border: 1px solid var(--border-color);
+    padding: 2rem;
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  .feature-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--light-gray);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+  }
+</style>
+
+<div class="container">
+  <!-- Action Bar -->
+  <div class="action-bar card mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+          <h2 class="h4 mb-1">
+            <i class="fas fa-newspaper me-2"></i>Latest Stories
+          </h2>
+          <p class="text-muted mb-0">Fresh perspectives and inspiring ideas from our community</p>
+        </div>
+        <a href="/posts/new" class="btn btn-primary">
+          <i class="fas fa-plus me-2"></i>New Post
+        </a>
+      </div>
+      
+      <!-- Filter Buttons -->
+      <div class="filter-buttons mt-3">
+        <button class="btn btn-outline-secondary filter-btn active" data-filter="all">
+          <i class="fas fa-th-large me-1"></i>All
+        </button>
+        <button class="btn btn-outline-secondary filter-btn" data-filter="popular">
+          <i class="fas fa-fire me-1"></i>Popular
+        </button>
+        <button class="btn btn-outline-secondary filter-btn" data-filter="recent">
+          <i class="fas fa-clock me-1"></i>Recent
+        </button>
+        <button class="btn btn-outline-secondary filter-btn" data-filter="featured">
+          <i class="fas fa-star me-1"></i>Featured
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-spinner text-center py-5" id="loadingSpinner">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <p class="text-muted mt-3">Loading inspiring stories...</p>
+  </div>
+
+  <% if (posts.length === 0) { %>
+    <!-- Empty State -->
+    <div class="empty-state card text-center py-5">
+      <div class="card-body">
+        <div class="empty-state-icon mb-4">
+          <i class="fas fa-comment-dots fa-3x text-muted"></i>
+        </div>
+        <h3 class="h4 mb-3">Your Blog Awaits Its First Story</h3>
+        <p class="text-muted mb-4">
+          Every great blog starts with a single post. Share your first idea and begin your writing journey.
+        </p>
+        <a href="/posts/new" class="btn btn-primary btn-lg">
+          <i class="fas fa-pen-fancy me-2"></i>Write Your First Post
+        </a>
+        <p class="text-muted small mt-3">
+          <i class="fas fa-lightbulb me-1"></i>Tip: Don't aim for perfection. Just start writing!
+        </p>
+      </div>
+    </div>
+  <% } else { %>
+    <!-- Posts Grid -->
+    <div class="row g-4" id="postsContainer">
+      <% posts.forEach(post => { %>
+        <div class="col-12 col-md-6 col-lg-4 post-card" data-category="general">
+          <article class="card h-100 post-card">
+            <div class="card-body d-flex flex-column">
+              <div class="d-flex justify-content-between align-items-start mb-3">
+                <span class="badge bg-light text-dark">
+                  <i class="fas fa-tag me-1"></i>General
+                </span>
+                <span class="reading-time text-muted small">
+                  <i class="far fa-clock me-1"></i>
+                  <span class="reading-time-text">3 min read</span>
+                </span>
+              </div>
+              <h3 class="card-title"><%= post.title %></h3>
+              <p class="card-text flex-grow-1">
+                <%= post.content.length > 120 ? post.content.substring(0, 120) + '…' : post.content %>
+              </p>
+              <div class="post-card-footer mt-auto pt-3 border-top">
+                <div class="d-flex justify-content-between align-items-center text-muted small mb-2">
+                  <span class="d-flex align-items-center">
+                    <i class="fas fa-user-circle me-1"></i>
+                    <strong><%= post.author %></strong>
+                  </span>
+                  <time class="d-flex align-items-center">
+                    <i class="far fa-calendar me-1"></i>
+                    <%= post.createdAt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) %>
+                  </time>
+                </div>
+                <div class="d-flex gap-2">
+                  <a href="/posts/<%= post._id %>" class="btn btn-sm btn-outline-primary flex-fill">
+                    <i class="fas fa-book-open me-1"></i>Read
+                  </a>
+                  <a href="/posts/<%= post._id %>/edit" class="btn btn-sm btn-outline-secondary">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      <% }); %>
+    </div>
+
+    <!-- Features Section -->
+    <div class="feature-grid mt-5">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-bolt"></i>
+        </div>
+        <h4>Lightning Fast</h4>
+        <p class="text-muted">Write and publish in seconds with our optimized editor</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h4>Mobile Ready</h4>
+        <p class="text-muted">Perfect reading experience on any device, anywhere</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <h4>Privacy First</h4>
+        <p class="text-muted">Your content belongs to you. Always.</p>
+      </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="footer-cta card text-center mt-5">
+      <div class="card-body py-5">
+        <h3 class="h2 mb-3">Ready to Share Your Story?</h3>
+        <p class="text-muted mb-4 lead">
+          Join our community of writers and start your blogging journey today.
+        </p>
+        <a href="/posts/new" class="btn btn-primary btn-lg">
+          <i class="fas fa-feather-alt me-2"></i>Start Writing Now
+        </a>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Simulate loading delay
+    setTimeout(function() {
+      document.getElementById('loadingSpinner').style.display = 'none';
+    }, 1000);
+
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const postCards = document.querySelectorAll('.post-card');
+    
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        const filter = this.getAttribute('data-filter');
+        document.getElementById('loadingSpinner').style.display = 'block';
+        
+        setTimeout(function() {
+          postCards.forEach(card => {
+            if (filter === 'all') {
+              card.style.display = 'block';
+            } else {
+              card.style.display = Math.random() > 0.5 ? 'block' : 'none';
+            }
+          });
+          document.getElementById('loadingSpinner').style.display = 'none';
+          showToast(`Showing ${filter} posts`);
+        }, 500);
+      });
+    });
+
+    // Calculate reading times
+    function calculateReadingTime(content) {
+      const wordsPerMinute = 200;
+      const wordCount = content.split(/\s+/).length;
+      return Math.ceil(wordCount / wordsPerMinute);
+    }
+
+    document.querySelectorAll('.card-text').forEach((element, index) => {
+      const content = element.textContent;
+      const readingTime = calculateReadingTime(content);
+      const readingTimeElements = document.querySelectorAll('.reading-time-text');
+      if (readingTimeElements[index]) {
+        readingTimeElements[index].textContent = `${readingTime} min read`;
+      }
+    });
+  });
+</script>
