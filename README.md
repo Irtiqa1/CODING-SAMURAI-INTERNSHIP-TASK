@@ -79,8 +79,6 @@ This repository contains all the tasks completed during the Coding Samurai Inter
 ```bash
 <<<<<<< HEAD
 git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
-=======
-
 ### 🎯 **Task 3: Interactive To-Do List Application**
 **Description:** Build a dynamic to-do list application using React with full CRUD functionality.
 
@@ -133,3 +131,5 @@ git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
 - **Frontend:** EJS, Bootstrap, CSS3
 git clone https://github.com/Irtiqa1/CODING-SAMURAI-INTERNSHIP-TASK.git
 >>>>>>> f4568a2a6e8cffa190215e8fbc6a799062c17ae3
+
+
