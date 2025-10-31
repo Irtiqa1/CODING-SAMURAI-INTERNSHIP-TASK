@@ -21,6 +21,142 @@ class PortfolioAnimations {
         }
     }
 
+    // Mobile Menu Setup - COMPLETELY FIXED
+    setupMobileMenu() {
+        console.log('Setting up mobile menu...');
+        
+        // First, remove ALL existing toggle buttons to prevent duplicates
+        const allToggles = document.querySelectorAll('.mobile-toggle, .mobile-menu-toggle, .menu-toggle, .hamburger, .hamburger-menu');
+        allToggles.forEach(toggle => {
+            console.log('Removing duplicate toggle:', toggle);
+            toggle.remove();
+        });
+        
+        // Remove any existing overlays
+        const existingOverlays = document.querySelectorAll('.nav-overlay');
+        existingOverlays.forEach(overlay => {
+            console.log('Removing duplicate overlay:', overlay);
+            overlay.remove();
+        });
+        
+        // Create SINGLE mobile toggle button
+        const mobileToggle = document.createElement('button');
+        mobileToggle.className = 'mobile-toggle';
+        mobileToggle.innerHTML = '<span></span><span></span><span></span>';
+        mobileToggle.setAttribute('aria-label', 'Toggle menu');
+        mobileToggle.setAttribute('type', 'button');
+        
+        // Create SINGLE overlay
+        const navOverlay = document.createElement('div');
+        navOverlay.className = 'nav-overlay';
+        
+        // Add to DOM
+        const nav = document.querySelector('nav');
+        if (nav) {
+            nav.appendChild(mobileToggle);
+            console.log('Mobile toggle added to nav');
+        }
+        document.body.appendChild(navOverlay);
+        console.log('Nav overlay added to body');
+        
+        // Toggle functionality
+        mobileToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            console.log('Mobile toggle clicked');
+            this.toggleMobileMenu();
+        });
+        
+        // Close menu when clicking overlay
+        navOverlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Overlay clicked - closing menu');
+            this.closeMobileMenu();
+        });
+        
+        // Close menu when clicking nav links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                console.log('Nav link clicked - closing menu');
+                this.closeMobileMenu();
+            });
+        });
+        
+        // Close menu when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-toggle')) {
+                    console.log('Clicked outside - closing menu');
+                    this.closeMobileMenu();
+                }
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                this.closeMobileMenu();
+            }
+        });
+        
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                console.log('Escape key pressed - closing menu');
+                this.closeMobileMenu();
+            }
+        });
+
+        console.log('Mobile menu setup complete');
+    }
+
+    toggleMobileMenu() {
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navOverlay = document.querySelector('.nav-overlay');
+        
+        console.log('Toggle mobile menu called');
+        console.log('Mobile toggle:', mobileToggle);
+        console.log('Nav links:', navLinks);
+        console.log('Nav overlay:', navOverlay);
+        
+        if (mobileToggle && navLinks && navOverlay) {
+            const isActive = mobileToggle.classList.contains('active');
+            console.log('Is menu active:', isActive);
+            
+            if (isActive) {
+                this.closeMobileMenu();
+            } else {
+                mobileToggle.classList.add('active');
+                navLinks.classList.add('active');
+                navOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('Menu opened successfully');
+            }
+        } else {
+            console.error('Mobile menu elements not found:');
+            console.error('Toggle:', mobileToggle);
+            console.error('Nav links:', navLinks);
+            console.error('Overlay:', navOverlay);
+        }
+    }
+
+    closeMobileMenu() {
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navOverlay = document.querySelector('.nav-overlay');
+        
+        console.log('Close mobile menu called');
+        
+        if (mobileToggle && navLinks && navOverlay) {
+            mobileToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            navOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('Menu closed successfully');
+        }
+    }
+
     // Modern smooth scrolling with performance optimization
     setupSmoothScrolling() {
         const links = document.querySelectorAll('a[href^="#"]');
@@ -34,13 +170,19 @@ class PortfolioAnimations {
                 if (target) {
                     this.animateScrollTo(target);
                     this.activateNavLink(link);
+                    
+                    // Close mobile menu if open
+                    if (window.innerWidth <= 768) {
+                        this.closeMobileMenu();
+                    }
                 }
             });
         });
     }
 
     animateScrollTo(target) {
-        const targetPosition = target.offsetTop - 80;
+        const headerHeight = window.innerWidth <= 768 ? 70 : 80;
+        const targetPosition = target.offsetTop - headerHeight;
         const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
         const duration = 800;
@@ -72,38 +214,6 @@ class PortfolioAnimations {
 
         // Add active class to clicked link with animation
         clickedLink.classList.add('active');
-        
-        // Add micro-interaction feedback
-        this.createRippleEffect(clickedLink);
-    }
-
-    createRippleEffect(element) {
-        const ripple = document.createElement('span');
-        const rect = element.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        
-        ripple.style.cssText = `
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(59, 130, 246, 0.4);
-            transform: scale(0);
-            animation: ripple 0.6s ease-out;
-            pointer-events: none;
-            width: ${size}px;
-            height: ${size}px;
-            left: ${-size/2 + rect.width/2}px;
-            top: ${-size/2 + rect.height/2}px;
-        `;
-
-        element.style.position = 'relative';
-        element.style.overflow = 'hidden';
-        element.appendChild(ripple);
-
-        setTimeout(() => {
-            if (ripple.parentNode === element) {
-                element.removeChild(ripple);
-            }
-        }, 600);
     }
 
     // Modern header effects with performance
@@ -116,12 +226,8 @@ class PortfolioAnimations {
             
             if (scrollY > 50) {
                 header.classList.add('scrolled');
-                header.style.setProperty('--header-bg', 'rgba(255, 255, 255, 0.95)');
-                header.style.setProperty('--header-blur', 'blur(20px)');
             } else {
                 header.classList.remove('scrolled');
-                header.style.setProperty('--header-bg', 'transparent');
-                header.style.setProperty('--header-blur', 'blur(0px)');
             }
             
             this.updateActiveSection();
@@ -140,7 +246,8 @@ class PortfolioAnimations {
 
     updateActiveSection() {
         const sections = document.querySelectorAll('section[id]');
-        const scrollPosition = window.scrollY + 100;
+        const headerHeight = window.innerWidth <= 768 ? 100 : 120;
+        const scrollPosition = window.scrollY + headerHeight;
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -369,15 +476,9 @@ class PortfolioAnimations {
     createThemeToggle() {
         const toggle = document.createElement('button');
         toggle.className = 'theme-toggle';
-       
-       
-
     }
 
     toggleTheme() {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        
         // Add transition for smooth theme change
         document.documentElement.style.setProperty('--theme-transition', 'all 0.3s ease');
         setTimeout(() => {
@@ -385,37 +486,12 @@ class PortfolioAnimations {
         }, 300);
     }
 
-    // Modern mobile menu
-    setupMobileMenu() {
-        const toggle = document.createElement('button');
-        toggle.className = 'mobile-menu-toggle';
-        toggle.innerHTML = '<span></span><span></span><span></span>';
-        toggle.setAttribute('aria-label', 'Toggle menu');
-        
-        const header = document.querySelector('header');
-        if (header) {
-            header.appendChild(toggle);
-            
-            toggle.addEventListener('click', () => {
-                document.body.classList.toggle('menu-open');
-                toggle.classList.toggle('active');
-            });
-            
-            // Close menu when clicking on links
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    document.body.classList.remove('menu-open');
-                    toggle.classList.remove('active');
-                });
-            });
-        }
-    }
-
     // UI enhancements
     setupUIEnhancements() {
         this.createScrollToTop();
         this.setupHoverEffects();
         this.addEnhancedStyles();
+        this.fixMobileLayouts();
     }
 
     createScrollToTop() {
@@ -443,11 +519,13 @@ class PortfolioAnimations {
     }
 
     setupHoverEffects() {
-        // Add hover effects to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mousemove', (e) => this.handleCardHover(e, card));
-            card.addEventListener('mouseleave', () => this.handleCardLeave(card));
-        });
+        // Add hover effects to project cards (desktop only)
+        if (window.innerWidth > 768) {
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => this.handleCardHover(e, card));
+                card.addEventListener('mouseleave', () => this.handleCardLeave(card));
+            });
+        }
     }
 
     handleCardHover(e, card) {
@@ -466,6 +544,56 @@ class PortfolioAnimations {
 
     handleCardLeave(card) {
         card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    }
+
+    // Fix mobile layouts
+    fixMobileLayouts() {
+        // Ensure hero text stays in one line on mobile
+        this.fixHeroText();
+        
+        // Fix experience section layout for mobile
+        this.fixExperienceLayout();
+        
+        // Handle touch events for mobile
+        this.setupTouchEvents();
+    }
+
+    fixHeroText() {
+        const heroTitle = document.querySelector('.hero h1');
+        if (heroTitle && window.innerWidth <= 768) {
+            // Ensure the name stays together
+            heroTitle.innerHTML = heroTitle.innerHTML.replace('Irtiqa Sami', '<span class="name-keep-together">Irtiqa Sami</span>');
+        }
+    }
+
+    fixExperienceLayout() {
+        if (window.innerWidth <= 768) {
+            // Add mobile-specific classes to experience cards
+            document.querySelectorAll('.experience-card').forEach(card => {
+                card.classList.add('mobile-experience-card');
+            });
+            
+            // Fix timeline layout
+            const timeline = document.querySelector('.experience-timeline');
+            if (timeline) {
+                timeline.classList.add('mobile-timeline');
+            }
+        }
+    }
+
+    setupTouchEvents() {
+        // Add touch-friendly interactions
+        document.querySelectorAll('.project-card, .skill-item, .experience-card').forEach(item => {
+            item.addEventListener('touchstart', () => {
+                item.classList.add('touch-active');
+            });
+            
+            item.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    item.classList.remove('touch-active');
+                }, 150);
+            });
+        });
     }
 
     // Notification system
@@ -532,340 +660,55 @@ class PortfolioAnimations {
         // Start intersection observer
         this.setupIntersectionObserver();
         
-        
+        // Initialize mobile-specific fixes
+        this.fixMobileLayouts();
     }
 
     // Add all necessary CSS styles
     addEnhancedStyles() {
         const styles = `
-            /* Modern CSS Variables */
-            :root {
-                --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-                --error-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-                --header-bg: transparent;
-                --header-blur: blur(0px);
-                --theme-transition: none;
+            /* Mobile-specific fixes */
+            .name-keep-together {
+                display: inline-block;
+                white-space: nowrap;
             }
 
-            .dark {
-                --primary-bg: #0f172a;
-                --text-primary: #e2e8f0;
+            /* Mobile experience card fixes */
+            .mobile-experience-card {
+                margin-bottom: 2rem;
             }
 
-            /* Smooth transitions */
-            * {
-                transition: color var(--theme-transition), background-color var(--theme-transition);
+            .mobile-timeline::before {
+                left: 25px !important;
             }
 
-            /* Modern Animations */
-            @keyframes fadeUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+            /* Touch interactions */
+            .touch-active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
             }
 
-            @keyframes ripple {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
-                }
+            /* Ensure mobile navigation works */
+            .nav-links.active {
+                right: 0 !important;
             }
 
-            @keyframes slideInRight {
-                from {
-                    opacity: 0;
-                    transform: translateX(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+            .nav-overlay.active {
+                opacity: 1 !important;
+                visibility: visible !important;
             }
 
-            /* Animation Classes */
-            .animate-on-scroll {
-                opacity: 0;
-                transform: translateY(30px);
-                transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            .mobile-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px) !important;
             }
 
-            .animate-on-scroll.animated {
-                opacity: 1;
-                transform: translateY(0);
+            .mobile-toggle.active span:nth-child(2) {
+                opacity: 0 !important;
+                transform: translateX(-10px) !important;
             }
 
-            .fadeUp.animated { animation: fadeUp 0.6s ease-out; }
-            .slideInRight.animated { animation: slideInRight 0.6s ease-out; }
-
-            /* Theme Toggle */
-            .theme-toggle {
-                position: fixed;
-                bottom: 2rem;
-                right: 2rem;
-                width: 3.5rem;
-                height: 3.5rem;
-                border-radius: 50%;
-                background: var(--primary-gradient);
-                border: none;
-                cursor: pointer;
-                box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-                z-index: 1000;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                overflow: hidden;
-                transition: all 0.3s ease;
-            }
-
-            .theme-toggle:hover {
-                transform: scale(1.1);
-                box-shadow: 0 12px 35px rgba(0,0,0,0.2);
-            }
-
-            .theme-icon {
-                position: absolute;
-                transition: all 0.3s ease;
-                font-size: 1.2rem;
-            }
-
-            .dark .theme-icon.sun { opacity: 0; transform: rotate(90deg); }
-            .dark .theme-icon.moon { opacity: 1; transform: rotate(0); }
-            .theme-icon.sun { opacity: 1; transform: rotate(0); }
-            .theme-icon.moon { opacity: 0; transform: rotate(-90deg); }
-
-            /* Scroll to Top */
-            .scroll-to-top {
-                position: fixed;
-                bottom: 2rem;
-                left: 2rem;
-                width: 3rem;
-                height: 3rem;
-                border-radius: 50%;
-                background: var(--success-gradient);
-                border: none;
-                color: white;
-                cursor: pointer;
-                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-                z-index: 1000;
-                opacity: 0;
-                transform: translateY(100px);
-                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-
-            .scroll-to-top.visible {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            .scroll-to-top:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            }
-
-            /* Mobile Menu */
-            .mobile-menu-toggle {
-                display: none;
-                flex-direction: column;
-                background: none;
-                border: none;
-                cursor: pointer;
-                padding: 0.5rem;
-                z-index: 1001;
-            }
-
-            .mobile-menu-toggle span {
-                width: 25px;
-                height: 2px;
-                background: currentColor;
-                margin: 3px 0;
-                transition: all 0.3s ease;
-                transform-origin: center;
-            }
-
-            .mobile-menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(6px, 6px);
-            }
-
-            .mobile-menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .mobile-menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(6px, -6px);
-            }
-
-            /* Header Effects */
-            header {
-                background: var(--header-bg);
-                backdrop-filter: var(--header-blur);
-                transition: all 0.3s ease;
-            }
-
-            /* Notifications */
-            .notification {
-                position: fixed;
-                top: 2rem;
-                right: 2rem;
-                background: white;
-                color: #333;
-                padding: 1rem 1.5rem;
-                border-radius: 12px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-                transform: translateX(400px);
-                opacity: 0;
-                transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-                z-index: 10000;
-                max-width: 400px;
-                border-left: 4px solid #667eea;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .notification.show {
-                transform: translateX(0);
-                opacity: 1;
-            }
-
-            .notification.success { border-left-color: #10b981; }
-            .notification.error { border-left-color: #ef4444; }
-            .notification.warning { border-left-color: #f59e0b; }
-
-            .notification-content {
-                display: flex;
-                align-items: center;
-                gap: 0.75rem;
-                flex: 1;
-            }
-
-            .notification-icon {
-                font-size: 1.2rem;
-                font-weight: bold;
-            }
-
-            .notification-close {
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                padding: 0;
-                width: 2rem;
-                height: 2rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border-radius: 50%;
-                transition: background-color 0.2s ease;
-            }
-
-            .notification-close:hover {
-                background: rgba(0,0,0,0.1);
-            }
-
-            /* Form Enhancements */
-            .form-group {
-                position: relative;
-                margin-bottom: 1.5rem;
-            }
-
-            .form-group.success input,
-            .form-group.success textarea {
-                border-color: #10b981;
-                box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
-            }
-
-            .form-group.error input,
-            .form-group.error textarea {
-                border-color: #ef4444;
-                box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-            }
-
-            .error-message {
-                color: #ef4444;
-                font-size: 0.875rem;
-                margin-top: 0.5rem;
-                position: absolute;
-                bottom: -1.25rem;
-                left: 0;
-            }
-
-            .btn-loader {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-            }
-
-            .loader-spinner {
-                width: 1.25rem;
-                height: 1.25rem;
-                border: 2px solid transparent;
-                border-top: 2px solid currentColor;
-                border-radius: 50%;
-                animation: spin 1s linear infinite;
-            }
-
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-
-            /* Project Card Hover Effects */
-            .project-card {
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-
-            .project-card:hover {
-                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            }
-
-            /* Skill Progress Animation */
-            .skill-progress {
-                transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            }
-
-            /* Responsive Design */
-            @media (max-width: 768px) {
-                .mobile-menu-toggle {
-                    display: flex;
-                }
-
-                .theme-toggle,
-                .scroll-to-top {
-                    bottom: 1rem;
-                    width: 3rem;
-                    height: 3rem;
-                }
-
-                .theme-toggle { right: 1rem; }
-                .scroll-to-top { left: 1rem; }
-
-                .notification {
-                    right: 1rem;
-                    left: 1rem;
-                    max-width: none;
-                }
-            }
-
-            /* Performance Optimizations */
-            .will-change {
-                will-change: transform, opacity;
-            }
-
-            /* Reduced motion support */
-            @media (prefers-reduced-motion: reduce) {
-                * {
-                    animation-duration: 0.01ms !important;
-                    animation-iteration-count: 1 !important;
-                    transition-duration: 0.01ms !important;
-                }
+            .mobile-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px) !important;
             }
         `;
 
